@@ -1,0 +1,152 @@
+[
+  {
+    "id": "MEL-53-10-C1",
+    "ata": "53-10",
+    "item_name": "Fuselage skin minor dent (diameter < 25mm, depth < 1mm)",
+    "category": "C",
+    "applicability": "All commercial aircraft",
+    "condition": "Dent diameter < 25mm AND depth < 1mm AND no cracks radiating from dent",
+    "action": "Defer up to 10 days, log in tech log, monitor at next A-check",
+    "operational_limit": "None"
+  },
+  {
+    "id": "MEL-53-10-B1",
+    "ata": "53-10",
+    "item_name": "Fuselage skin medium dent (diameter 25-50mm)",
+    "category": "B",
+    "applicability": "All commercial aircraft",
+    "condition": "Dent diameter 25-50mm AND depth < 2mm AND no cracks AND not in pressurized critical area",
+    "action": "Repair within 72 hours; apply temporary skin patch per SRM 53-10",
+    "operational_limit": "Reduced cruise altitude may be required pending engineering review"
+  },
+  {
+    "id": "MEL-53-10-A1",
+    "ata": "53-10",
+    "item_name": "Crack-bearing dent on fuselage skin",
+    "category": "A",
+    "applicability": "All commercial aircraft",
+    "condition": "Any dent with visible crack propagation OR dent in pressurized fuselage with depth > 2mm",
+    "action": "Aircraft no-go. Permanent structural repair required before next flight per SRM",
+    "operational_limit": "Grounded until repaired and signed off"
+  },
+  {
+    "id": "MEL-53-40-C1",
+    "ata": "53-40",
+    "item_name": "Single missing rivet in non-critical area",
+    "category": "C",
+    "applicability": "All commercial aircraft",
+    "condition": "Single rivet missing AND not in primary load path AND adjacent fasteners intact",
+    "action": "Defer up to 10 days; replace at next scheduled maintenance opportunity",
+    "operational_limit": "Visual inspection required at each transit check"
+  },
+  {
+    "id": "MEL-53-40-A1",
+    "ata": "53-40",
+    "item_name": "Missing fastener cluster (3 or more adjacent)",
+    "category": "A",
+    "applicability": "All commercial aircraft",
+    "condition": "Three or more adjacent fasteners missing OR fasteners missing along a primary load path",
+    "action": "Aircraft no-go. Restore fastener integrity per SRM before next flight",
+    "operational_limit": "Grounded until repaired"
+  },
+  {
+    "id": "MEL-53-40-B1",
+    "ata": "53-40",
+    "item_name": "Loose or damaged rivet (head deformed or proud)",
+    "category": "B",
+    "applicability": "All commercial aircraft",
+    "condition": "Rivet head deformed, proud, or smoking AND no crack in surrounding skin",
+    "action": "Replace within 72 hours; inspect surrounding skin for fatigue indications",
+    "operational_limit": "Monitor at each pre-flight walk-around"
+  },
+  {
+    "id": "MEL-53-10-A2",
+    "ata": "53-10",
+    "item_name": "Skin rupture / through-thickness hole (any size)",
+    "category": "A",
+    "applicability": "All commercial aircraft",
+    "condition": "Any complete penetration of the fuselage skin",
+    "action": "Aircraft no-go. Structural repair per SRM 53-10 required; engineering disposition mandatory",
+    "operational_limit": "Grounded until repaired and re-certified"
+  },
+  {
+    "id": "MEL-53-10-A3",
+    "ata": "53-10",
+    "item_name": "Tear at panel edge or skin lap joint",
+    "category": "A",
+    "applicability": "All commercial aircraft",
+    "condition": "Tear or rupture initiated at a panel edge, lap joint, or stringer attachment",
+    "action": "Aircraft no-go. Stop-drill and permanent repair required per SRM",
+    "operational_limit": "Grounded until repaired"
+  },
+  {
+    "id": "MEL-52-10-B1",
+    "ata": "52-10",
+    "item_name": "Passenger/crew door fastener damage",
+    "category": "B",
+    "applicability": "All commercial aircraft",
+    "condition": "Damaged or loose fastener on door structure AND door seal not compromised",
+    "action": "Repair within 72 hours; verify door rigging and pressurization seal after repair",
+    "operational_limit": "Confirm door fully latched and locked indications before each flight"
+  },
+  {
+    "id": "MEL-56-10-A1",
+    "ata": "56-10",
+    "item_name": "Flight compartment window frame fastener damage",
+    "category": "A",
+    "applicability": "All commercial aircraft",
+    "condition": "Any damaged or missing fastener on a flight compartment window frame",
+    "action": "Aircraft no-go. Restore fastener integrity and pressure-test before next flight",
+    "operational_limit": "Grounded until repaired"
+  },
+  {
+    "id": "MEL-57-50-C1",
+    "ata": "57-50",
+    "item_name": "Wing skin small dent (diameter < 25mm)",
+    "category": "C",
+    "applicability": "All commercial aircraft",
+    "condition": "Dent diameter < 25mm AND depth < 1mm AND not over fuel tank boundary",
+    "action": "Defer up to 10 days; smooth-blend per SRM 57-50 at next opportunity",
+    "operational_limit": "Visual inspection at each daily check"
+  },
+  {
+    "id": "MEL-54-10-B1",
+    "ata": "54-10",
+    "item_name": "Nacelle skin dent (not impacting engine)",
+    "category": "B",
+    "applicability": "All commercial aircraft",
+    "condition": "Dent on nacelle outer skin AND not interfering with engine cowling latches AND no inlet airflow disturbance",
+    "action": "Repair within 72 hours; inspect cowling fit and engine inlet for FOD",
+    "operational_limit": "Engine inspection at each transit"
+  },
+  {
+    "id": "MEL-55-30-C1",
+    "ata": "55-30",
+    "item_name": "Vertical stabilizer minor dent",
+    "category": "C",
+    "applicability": "All commercial aircraft",
+    "condition": "Dent diameter < 30mm AND depth < 1mm AND not on leading edge",
+    "action": "Defer up to 10 days; cosmetic repair at next scheduled visit",
+    "operational_limit": "None"
+  },
+  {
+    "id": "MEL-53-10-C2",
+    "ata": "53-10",
+    "item_name": "Existing repair patch showing edge wear",
+    "category": "C",
+    "applicability": "All commercial aircraft",
+    "condition": "Previously repaired area showing minor edge wear AND no lift / debond AND no surrounding cracks",
+    "action": "Defer up to 10 days with monitoring; touch-up sealant and re-inspect at next A-check",
+    "operational_limit": "Monitor at each daily check"
+  },
+  {
+    "id": "MEL-53-10-D1",
+    "ata": "53-10",
+    "item_name": "General skin scratch / scuff (no penetration)",
+    "category": "D",
+    "applicability": "All commercial aircraft",
+    "condition": "Surface scratch AND no skin penetration AND depth within paint thickness",
+    "action": "Defer up to 120 days; cosmetic touch-up at next scheduled paint cycle",
+    "operational_limit": "None"
+  }
+]

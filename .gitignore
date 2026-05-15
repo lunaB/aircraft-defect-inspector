@@ -1,0 +1,17 @@
+.roboflow_key
+dataset/
+training/runs/
+backend/model/*.pt
+backend/.venv/
+__pycache__/
+node_modules/
+.next/
+.env
+.env.local
+
+# OS / editor
+.DS_Store
+
+# Tooling artifacts
+.gstack/
+.playwright-mcp/
