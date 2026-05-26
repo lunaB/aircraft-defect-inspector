@@ -2,6 +2,7 @@
 dataset/
 training/runs/
 backend/model/*.pt
+!backend/model/best.pt
 backend/.venv/
 __pycache__/
 node_modules/
