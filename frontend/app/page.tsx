@@ -14,6 +14,7 @@ import { ReportPanel } from "@/components/ReportPanel";
 import { ApiKeyInput, readStoredApiKey } from "@/components/ApiKeyInput";
 import { ModelCard } from "@/components/ModelCard";
 import { ShortcutsOverlay } from "@/components/ShortcutsOverlay";
+import { DEFAULT_VISIBLE_CONFIDENCE } from "@/lib/detection-config";
 import { consumeSSE } from "@/lib/sse-client";
 import type {
   DefectAnalysis,
@@ -36,7 +37,7 @@ export default function HomePage() {
   const [, setMel] = useState<StageState>("idle");
   const [isStreaming, setIsStreaming] = useState(false);
 
-  const [confidence, setConfidence] = useState(0.15);
+  const [confidence, setConfidence] = useState(DEFAULT_VISIBLE_CONFIDENCE);
   const [iou, setIou] = useState(0.7);
   const [enabledClasses, setEnabledClasses] = useState<Set<string>>(new Set());
   const [showLabels, setShowLabels] = useState(true);

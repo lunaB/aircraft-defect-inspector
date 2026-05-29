@@ -108,6 +108,12 @@ def health() -> dict[str, Any]:
 @app.post("/detect", response_model=DetectResponse, response_model_by_alias=True)
 async def detect(
     image: UploadFile = File(...),
+    conf: float = Query(
+        0.05,
+        ge=0.0,
+        le=1.0,
+        description="Detection confidence threshold. Default 0.05 keeps weak candidates for UI filtering.",
+    ),
     iou: float = Query(
         0.7,
         ge=0.0,
@@ -129,7 +135,7 @@ async def detect(
 
     model, source = get_model()
     t0 = time.perf_counter()
-    results = model.predict(img, verbose=False, conf=0.10, iou=iou)
+    results = model.predict(img, verbose=False, conf=conf, iou=iou)
     elapsed_ms = (time.perf_counter() - t0) * 1000
 
     detections: list[Detection] = []

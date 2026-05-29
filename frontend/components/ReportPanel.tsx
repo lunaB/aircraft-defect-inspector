@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import type { Detection, InspectionReport } from "@/lib/types";
 import { ReportCard } from "./ReportCard";
@@ -38,7 +39,19 @@ export function ReportPanel({
   // null = no analysis yet (chat shows placeholder).
   const resetKey = analysisId > 0 ? analysisId : null;
 
-  const defects = report?.defects ?? [];
+  const visibleDetectionIds = useMemo(() => {
+    const ids = new Set<string>();
+    detections.forEach((d, i) => ids.add(d.id ?? `D${i + 1}`));
+    return ids;
+  }, [detections]);
+
+  const visibleReport = useMemo<InspectionReport | null>(() => {
+    if (!report) return null;
+    const defects = report.defects.filter((d) => visibleDetectionIds.has(d.id));
+    return { ...report, defects };
+  }, [report, visibleDetectionIds]);
+
+  const defects = visibleReport?.defects ?? [];
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -51,22 +64,22 @@ export function ReportPanel({
           size="sm"
           variant="outline"
           onClick={onExportPDF}
-          disabled={!report}
+          disabled={!visibleReport || defects.length === 0}
         >
           Export PDF
         </Button>
       </div>
 
       {/* Severity chart strip (auto height, present only when report). */}
-      {report && (
+      {visibleReport && (
         <div className="shrink-0 border-b border-zinc-800 px-4 py-3">
-          <SeverityChart report={report} />
-          {report.summary && (
+          <SeverityChart report={visibleReport} />
+          {visibleReport.summary && (
             <div className="mt-2 rounded-md border border-zinc-800 bg-zinc-900/40 p-2 text-[11px] leading-snug text-zinc-200">
               <div className="mb-0.5 text-[9px] font-medium uppercase tracking-wider text-zinc-500">
                 Summary
               </div>
-              {report.summary}
+              {visibleReport.summary}
             </div>
           )}
         </div>
@@ -100,6 +113,11 @@ export function ReportPanel({
               Upload an image to see analysis results here
             </div>
           )}
+          {report && defects.length === 0 && (
+            <div className="rounded-md border border-dashed border-zinc-800 p-6 text-center text-xs text-zinc-600">
+              No detections match the current confidence/class filters.
+            </div>
+          )}
         </div>
       </div>
 
@@ -107,7 +125,7 @@ export function ReportPanel({
       <div className="h-72 shrink-0 border-t border-zinc-800">
         <ResultsChat
           detections={detections}
-          report={report}
+          report={visibleReport}
           apiKeyAvailable={apiKeyAvailable}
           resetKey={resetKey}
         />

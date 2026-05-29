@@ -67,6 +67,7 @@ export function buildSystemPrompt(): string {
     "5. recommended_actions MUST contain at least three specific maintenance actions referencing SRM (Structural Repair Manual) chapters where appropriate.",
     "6. All user-facing strings (summary, estimated_location, estimated_cause, mel_match.reasoning, recommended_actions) MUST be written in fluent professional English.",
     "7. estimated_location should describe the airframe region and position (e.g., 'Right side of forward fuselage, near window line', 'Left wing upper surface, mid-span', 'Vertical stabilizer leading edge').",
+    "8. Do not create defects that are not listed in the YOLO detections. Preserve each detection id, yolo_class, and yolo_confidence exactly as provided.",
   ].join("\n");
 }
 

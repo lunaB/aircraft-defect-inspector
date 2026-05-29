@@ -1,6 +1,8 @@
 import OpenAI from "openai";
 import { buildSystemPrompt, buildUserPrompt } from "@/lib/prompts";
 import { MOCK_DETECTIONS } from "@/lib/mock-detections";
+import { BACKEND_CANDIDATE_CONFIDENCE } from "@/lib/detection-config";
+import { groundReportInDetections } from "@/lib/report-grounding";
 import { mapYoloClassToATA } from "@/lib/ata-chapters";
 import type {
   AnalyzeEvent,
@@ -24,13 +26,17 @@ function sseEncode(event: AnalyzeEvent): Uint8Array {
 async function callYOLO(
   file: File,
   iou: number | null,
+  conf: number,
 ): Promise<DetectResponse> {
   const fd = new FormData();
   fd.append("image", file, file.name);
-  const url =
-    iou !== null
-      ? `${BACKEND_URL}/detect?iou=${encodeURIComponent(iou.toFixed(4))}`
-      : `${BACKEND_URL}/detect`;
+  const params = new URLSearchParams({
+    conf: conf.toFixed(4),
+  });
+  if (iou !== null) {
+    params.set("iou", iou.toFixed(4));
+  }
+  const url = `${BACKEND_URL}/detect?${params.toString()}`;
   const res = await fetch(url, {
     method: "POST",
     body: fd,
@@ -196,7 +202,11 @@ export async function POST(req: Request): Promise<Response> {
     try {
       // We need to wrap the buffer into a fresh File for forwarding.
       const forwardFile = new File([buf], file.name, { type: mime });
-      detectResp = await callYOLO(forwardFile, iouValue);
+      detectResp = await callYOLO(
+        forwardFile,
+        iouValue,
+        BACKEND_CANDIDATE_CONFIDENCE,
+      );
     } catch (err) {
       backendError = err instanceof Error ? err.message : String(err);
       detectResp = MOCK_DETECTIONS;
@@ -280,7 +290,10 @@ export async function POST(req: Request): Promise<Response> {
 
         const parsed = safeParseReport(buffer);
         if (parsed) {
-          send({ type: "report_done", payload: parsed });
+          send({
+            type: "report_done",
+            payload: groundReportInDetections(parsed, detectResp.detections),
+          });
         } else {
           send({
             type: "error",

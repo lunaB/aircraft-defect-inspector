@@ -32,15 +32,26 @@ export function DetectionCanvas({
 }: DetectionCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  const [scale, setScale] = useState({ x: 1, y: 1, w: 0, h: 0 });
+  const [scale, setScale] = useState({
+    x: 1,
+    y: 1,
+    left: 0,
+    top: 0,
+    w: 0,
+    h: 0,
+  });
 
   const recompute = () => {
     const img = imgRef.current;
-    if (!img || !result) return;
+    const container = containerRef.current;
+    if (!img || !container || !result) return;
     const rect = img.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
     setScale({
       x: rect.width / result.image_width,
       y: rect.height / result.image_height,
+      left: rect.left - containerRect.left,
+      top: rect.top - containerRect.top,
       w: rect.width,
       h: rect.height,
     });
@@ -50,6 +61,7 @@ export function DetectionCanvas({
     recompute();
     const ro = new ResizeObserver(recompute);
     if (imgRef.current) ro.observe(imgRef.current);
+    if (containerRef.current) ro.observe(containerRef.current);
     window.addEventListener("resize", recompute);
     return () => {
       ro.disconnect();
@@ -99,6 +111,8 @@ export function DetectionCanvas({
       <div
         className="pointer-events-none absolute"
         style={{
+          left: scale.left,
+          top: scale.top,
           width: scale.w,
           height: scale.h,
         }}
